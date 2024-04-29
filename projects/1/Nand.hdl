@@ -1,0 +1,10 @@
+/*
+Implementation of a NAND gate using built-in NAND gate
+*/
+
+CHIP Nand {
+	IN a,b;
+	OUT out;
+
+	BUILTIN Nand;
+}
