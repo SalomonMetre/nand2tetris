@@ -11,7 +11,6 @@ CHIP Or {
     	OUT out;
 
     	PARTS:
-    	//// Or gate implementation
 	Nand(a=a, b=a, out=aNanda);
 	Nand(a=b, b=b, out=bNandb);
 	Nand(a=aNanda, b=bNandb, out=out);
