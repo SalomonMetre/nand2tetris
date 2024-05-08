@@ -10,9 +10,146 @@
  *       d if sel = 11
  */
 CHIP Mux4Way16 {
-    IN a[16], b[16], c[16], d[16], sel[2];
-    OUT out[16];
+	IN a[16], b[16], c[16], d[16], sel[2];
+	OUT out[16];
     
-    PARTS:
-    //// Replace this comment with your code.
+    	PARTS:
+    	// 4 Way Mux 16
+    	
+    	// shared vars
+    	Not(in=sel[1], out=Notsel2);
+    	Not(in=sel[0], out=Notsel1);
+    	And(a=Notsel2, b=Notsel1, out=Notsel2AndNotsel1);
+    	And(a=Notsel2, b=sel[0], out=Notsel2Andsel1);
+    	And(a=sel[1], b=Notsel1, out=sel2AndNotsel1);
+    	And(a=sel[1], b=sel[0], out=sel2Andsel1);
+    	
+    	// individual bits
+		And(a=a[0], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel10);
+    	And(a=b[0], b=Notsel2Andsel1, out=bAndNotsel2Andsel10);
+    	And(a=c[0], b=sel2AndNotsel1, out=cAndsel2AndNotsel10);
+    	And(a=d[0], b=sel2Andsel1, out=dAndsel2Andsel10);
+    	Or(a=aAndNotsel2AndNotsel10, b=bAndNotsel2Andsel10, out=or10);
+    	Or(a=or10, b=cAndsel2AndNotsel10, out=or20);
+    	Or(a=or20, b=dAndsel2Andsel10, out=out[0]);
+
+    	And(a=a[1], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel11);
+    	And(a=b[1], b=Notsel2Andsel1, out=bAndNotsel2Andsel11);
+    	And(a=c[1], b=sel2AndNotsel1, out=cAndsel2AndNotsel11);
+    	And(a=d[1], b=sel2Andsel1, out=dAndsel2Andsel11);
+    	Or(a=aAndNotsel2AndNotsel11, b=bAndNotsel2Andsel11, out=or11);
+    	Or(a=or11, b=cAndsel2AndNotsel11, out=or21);
+    	Or(a=or21, b=dAndsel2Andsel11, out=out[1]);
+    	
+    	And(a=a[2], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel12);
+    	And(a=b[2], b=Notsel2Andsel1, out=bAndNotsel2Andsel12);
+    	And(a=c[2], b=sel2AndNotsel1, out=cAndsel2AndNotsel12);
+    	And(a=d[2], b=sel2Andsel1, out=dAndsel2Andsel12);
+    	Or(a=aAndNotsel2AndNotsel12, b=bAndNotsel2Andsel12, out=or12);
+    	Or(a=or12, b=cAndsel2AndNotsel12, out=or22);
+    	Or(a=or22, b=dAndsel2Andsel12, out=out[2]);
+    	
+    	And(a=a[3], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel13);
+    	And(a=b[3], b=Notsel2Andsel1, out=bAndNotsel2Andsel13);
+    	And(a=c[3], b=sel2AndNotsel1, out=cAndsel2AndNotsel13);
+    	And(a=d[3], b=sel2Andsel1, out=dAndsel2Andsel13);
+    	Or(a=aAndNotsel2AndNotsel13, b=bAndNotsel2Andsel13, out=or13);
+    	Or(a=or13, b=cAndsel2AndNotsel13, out=or23);
+    	Or(a=or23, b=dAndsel2Andsel13, out=out[3]);
+    	
+    	And(a=a[4], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel14);
+    	And(a=b[4], b=Notsel2Andsel1, out=bAndNotsel2Andsel14);
+    	And(a=c[4], b=sel2AndNotsel1, out=cAndsel2AndNotsel14);
+    	And(a=d[4], b=sel2Andsel1, out=dAndsel2Andsel14);
+    	Or(a=aAndNotsel2AndNotsel14, b=bAndNotsel2Andsel14, out=or14);
+    	Or(a=or14, b=cAndsel2AndNotsel14, out=or24);
+    	Or(a=or24, b=dAndsel2Andsel14, out=out[4]);
+    	
+    	And(a=a[5], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel15);
+    	And(a=b[5], b=Notsel2Andsel1, out=bAndNotsel2Andsel15);
+    	And(a=c[5], b=sel2AndNotsel1, out=cAndsel2AndNotsel15);
+    	And(a=d[5], b=sel2Andsel1, out=dAndsel2Andsel15);
+    	Or(a=aAndNotsel2AndNotsel15, b=bAndNotsel2Andsel15, out=or15);
+    	Or(a=or15, b=cAndsel2AndNotsel15, out=or25);
+    	Or(a=or25, b=dAndsel2Andsel15, out=out[5]);
+    	
+    	And(a=a[6], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel16);
+    	And(a=b[6], b=Notsel2Andsel1, out=bAndNotsel2Andsel16);
+    	And(a=c[6], b=sel2AndNotsel1, out=cAndsel2AndNotsel16);
+    	And(a=d[6], b=sel2Andsel1, out=dAndsel2Andsel16);
+    	Or(a=aAndNotsel2AndNotsel16, b=bAndNotsel2Andsel16, out=or16);
+    	Or(a=or16, b=cAndsel2AndNotsel16, out=or26);
+    	Or(a=or26, b=dAndsel2Andsel16, out=out[6]);
+    	
+    	And(a=a[7], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel17);
+    	And(a=b[7], b=Notsel2Andsel1, out=bAndNotsel2Andsel17);
+    	And(a=c[7], b=sel2AndNotsel1, out=cAndsel2AndNotsel17);
+    	And(a=d[7], b=sel2Andsel1, out=dAndsel2Andsel17);
+    	Or(a=aAndNotsel2AndNotsel17, b=bAndNotsel2Andsel17, out=or17);
+    	Or(a=or17, b=cAndsel2AndNotsel17, out=or27);
+    	Or(a=or27, b=dAndsel2Andsel17, out=out[7]);
+    	
+    	And(a=a[8], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel18);
+    	And(a=b[8], b=Notsel2Andsel1, out=bAndNotsel2Andsel18);
+    	And(a=c[8], b=sel2AndNotsel1, out=cAndsel2AndNotsel18);
+    	And(a=d[8], b=sel2Andsel1, out=dAndsel2Andsel18);
+    	Or(a=aAndNotsel2AndNotsel18, b=bAndNotsel2Andsel18, out=or18);
+    	Or(a=or18, b=cAndsel2AndNotsel18, out=or28);
+    	Or(a=or28, b=dAndsel2Andsel18, out=out[8]);
+    	
+    	And(a=a[9], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel19);
+    	And(a=b[9], b=Notsel2Andsel1, out=bAndNotsel2Andsel19);
+    	And(a=c[9], b=sel2AndNotsel1, out=cAndsel2AndNotsel19);
+    	And(a=d[9], b=sel2Andsel1, out=dAndsel2Andsel19);
+    	Or(a=aAndNotsel2AndNotsel19, b=bAndNotsel2Andsel19, out=or19);
+    	Or(a=or19, b=cAndsel2AndNotsel19, out=or29);
+    	Or(a=or29, b=dAndsel2Andsel19, out=out[9]);
+    	
+    	And(a=a[10], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel1a);
+    	And(a=b[10], b=Notsel2Andsel1, out=bAndNotsel2Andsel1a);
+    	And(a=c[10], b=sel2AndNotsel1, out=cAndsel2AndNotsel1a);
+    	And(a=d[10], b=sel2Andsel1, out=dAndsel2Andsel1a);
+    	Or(a=aAndNotsel2AndNotsel1a, b=bAndNotsel2Andsel1a, out=or1a);
+    	Or(a=or1a, b=cAndsel2AndNotsel1a, out=or2a);
+    	Or(a=or2a, b=dAndsel2Andsel1a, out=out[10]);
+    	
+    	And(a=a[11], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel1b);
+    	And(a=b[11], b=Notsel2Andsel1, out=bAndNotsel2Andsel1b);
+    	And(a=c[11], b=sel2AndNotsel1, out=cAndsel2AndNotsel1b);
+    	And(a=d[11], b=sel2Andsel1, out=dAndsel2Andsel1b);
+    	Or(a=aAndNotsel2AndNotsel1b, b=bAndNotsel2Andsel1b, out=or1b);
+    	Or(a=or1b, b=cAndsel2AndNotsel1b, out=or2b);
+    	Or(a=or2b, b=dAndsel2Andsel1b, out=out[11]);
+    	
+    	And(a=a[12], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel1c);
+    	And(a=b[12], b=Notsel2Andsel1, out=bAndNotsel2Andsel1c);
+    	And(a=c[12], b=sel2AndNotsel1, out=cAndsel2AndNotsel1c);
+    	And(a=d[12], b=sel2Andsel1, out=dAndsel2Andsel1c);
+    	Or(a=aAndNotsel2AndNotsel1c, b=bAndNotsel2Andsel1c, out=or1c);
+    	Or(a=or1c, b=cAndsel2AndNotsel1c, out=or2c);
+    	Or(a=or2c, b=dAndsel2Andsel1c, out=out[12]);
+    	
+    	And(a=a[13], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel1d);
+    	And(a=b[13], b=Notsel2Andsel1, out=bAndNotsel2Andsel1d);
+    	And(a=c[13], b=sel2AndNotsel1, out=cAndsel2AndNotsel1d);
+    	And(a=d[13], b=sel2Andsel1, out=dAndsel2Andsel1d);
+    	Or(a=aAndNotsel2AndNotsel1d, b=bAndNotsel2Andsel1d, out=or1d);
+    	Or(a=or1d, b=cAndsel2AndNotsel1d, out=or2d);
+    	Or(a=or2d, b=dAndsel2Andsel1d, out=out[13]);
+    	
+    	And(a=a[14], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel1e);
+    	And(a=b[14], b=Notsel2Andsel1, out=bAndNotsel2Andsel1e);
+    	And(a=c[14], b=sel2AndNotsel1, out=cAndsel2AndNotsel1e);
+    	And(a=d[14], b=sel2Andsel1, out=dAndsel2Andsel1e);
+    	Or(a=aAndNotsel2AndNotsel1e, b=bAndNotsel2Andsel1e, out=or1e);
+    	Or(a=or1e, b=cAndsel2AndNotsel1e, out=or2e);
+    	Or(a=or2e, b=dAndsel2Andsel1e, out=out[14]);
+    	
+    	And(a=a[15], b=Notsel2AndNotsel1, out=aAndNotsel2AndNotsel1f);
+    	And(a=b[15], b=Notsel2Andsel1, out=bAndNotsel2Andsel1f);
+    	And(a=c[15], b=sel2AndNotsel1, out=cAndsel2AndNotsel1f);
+    	And(a=d[15], b=sel2Andsel1, out=dAndsel2Andsel1f);
+    	Or(a=aAndNotsel2AndNotsel1f, b=bAndNotsel2Andsel1f, out=or1f);
+    	Or(a=or1f, b=cAndsel2AndNotsel1f, out=or2f);
+    	Or(a=or2f, b=dAndsel2Andsel1f, out=out[15]);
 }
